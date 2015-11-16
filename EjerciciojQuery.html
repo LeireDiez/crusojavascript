@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<title>Calculadora</title>
+
+<style>
+#resultado {border-style: solid; width: 100%; border-width: 1px; text-align: right;}
+</style>
+</head>
+
+<body>
+
+<table>
+	<th>
+		<td colspan="4">Calculadora</td>
+	</th>
+	<tr>
+		<td colspan="4" id="resultado"></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="numero7">7</button></td>
+		<td><button type="button" id="numero8">8</button></td>
+		<td><button type="button" id="numero9">9</button></td>
+		<td><button type="button" id="suma" class="operador">+</button></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="numero4">4</button></td>
+		<td><button type="button" id="numero5">5</button></td>
+		<td><button type="button" id="numero6">6</button></td>
+		<td><button type="button" id="resta" class="operador">-</button></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="numero1">1</button</td>
+		<td><button type="button" id="numero2">2</button</td>
+		<td><button type="button" id="numero3">3</button</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td><button type="button" id="numero0" >0</button<td>
+		<td colspan="2"><button type="button" id="clear" >CE</button<td>
+		<td><button type="button" id="igual">=</button></td>
+	</tr>
+</table>
+
+<script type='text/javascript'>
+
+var num1 = '';
+var num2 = '';
+var operador = '';
+
+$( document ).ready(function() {
+    	$( ".operador" ).fadeOut( "slow" );
+	$( "#igual" ).fadeOut( "slow" );
+	mostrarResultado('0')
+});
+
+$( "#numero1" ).click(function() {
+	insertarNumero('1');
+});
+$( "#numero2" ).click(function() {
+  	insertarNumero('2');
+});
+$( "#numero3" ).click(function() {
+  	insertarNumero('3');
+});
+$( "#numero4" ).click(function() {
+  	insertarNumero('4');
+});
+$( "#numero5" ).click(function() {
+	insertarNumero('5');
+});
+$( "#numero6" ).click(function() {
+	insertarNumero('6');
+});
+$( "#numero7" ).click(function() {
+	insertarNumero('7');
+});
+$( "#numero8" ).click(function() {
+	insertarNumero('8');
+});
+$( "#numero9" ).click(function() {
+	insertarNumero('9');
+});
+$( "#numero0" ).click(function() {
+	insertarNumero('0');
+});
+$( "#suma" ).click(function() {
+	insertarOperador('+');
+});
+$( "#resta" ).click(function() {
+	insertarOperador('-');
+});
+$( "#igual" ).click(function() {
+	calcular();
+});
+$( "#clear" ).click(function() {
+	clear();
+});
+
+function insertarNumero(numero){
+	if (operador == ''){
+		num1 += numero;
+		mostrarResultado(num1);
+		$( ".operador" ).fadeIn( "slow" );
+	} else{
+		num2 += numero;
+		mostrarResultado(num2);
+		$( "#igual" ).fadeIn( "slow" );
+	}
+}
+function mostrarResultado(resultado){
+	$( "#resultado" ).text(resultado);
+}
+function insertarOperador(op){
+	operador = op;
+	$( "#resultado" ).text(op);
+	$( ".operador" ).fadeOut( "slow" );
+}
+function calcular(){
+	var resultado;
+	if (operador == '+'){
+		resultado = parseInt(num1) + parseInt(num2);
+	} else if (operador == '-'){
+		resultado = parseInt(num1) - parseInt(num2);
+	}
+	num1 = resultado;
+	operador = '';
+	num2 = '';
+	mostrarResultado(resultado);
+	$( ".operador" ).fadeIn( "slow" );
+	$( "#igual" ).fadeOut( "slow" );
+}
+function clear(){
+	num1 = ''
+	operador = '';
+	num2 = '';
+	mostrarResultado('0');
+	$( ".operador" ).fadeOut( "slow" );
+	$( "#igual" ).fadeOut( "slow" );
+}
+
+</script>
+
+</body>
+</html>
